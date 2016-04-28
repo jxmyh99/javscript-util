@@ -44,6 +44,14 @@ js常用的函数
         }
     }
 
+### 另类获取dom的方法
+
+    function $$(selector, context) {
+        context = context || document;
+        var elements = context.querySelectorAll(selector);
+        return Array.prototype.slice.call(elements);
+    }
+
 ### 添加class
     $.addClass = function(elem, newClass){
         if(!elem) 
