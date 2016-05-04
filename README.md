@@ -242,3 +242,10 @@ $.contains = function(parent, cur){
         $.addClass(tips, 'hide');
         setTimeout('$.removeClass($(".tips")[0], "hide")', 1000);
     };
+### 判断是否支持某css的写法
+    var root = document.documentElement;//获取document的文档根节点
+    if('clip' in root.style){
+        alert("支持clip");
+    }else{
+        alert("不支持clip");
+    }
