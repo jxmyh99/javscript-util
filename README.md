@@ -140,16 +140,16 @@ js常用的函数
     $.getRelatedTarget = function(event){
         return event.relatedTarget || event.toElement || event.fromElement || null;
     };
-
-$.contains = function(parent, cur){
-    while(cur.parentNode){
-        if(cur.parentNode === parent){
-            return true;
+### 暂时空
+    $.contains = function(parent, cur){
+        while(cur.parentNode){
+            if(cur.parentNode === parent){
+                return true;
+            }
+            cur = cur.parentNode;
         }
-        cur = cur.parentNode;
-    }
-    return false;
-};
+        return false;
+    };
 ### 阻止事件冒泡
     $.preventDefault = function(event){
         if(event.preventDefault){
@@ -179,7 +179,7 @@ $.contains = function(parent, cur){
         }
         return {"left": left, "top": top};
     };
-
+### 这里的方法暂时还没有分析
     $.get_dir = function(elem, mouse_pos){
         if(!elem) return false;
         var pos = $.get_pos(elem),
@@ -204,7 +204,7 @@ $.contains = function(parent, cur){
             return "bottom";
         }
     };
-
+### 这里的方法暂时还没有分析
     function params(o){ //将要传给后台的参数转化为字符串，以加入到url中
         var arr = [];
         for(var i in o){
@@ -212,7 +212,7 @@ $.contains = function(parent, cur){
         }
         return arr.join("&");
     }
-
+### 这里的方法暂时还没有分析
     $.ajaxp = function(args){ //创建script节点，向后台请求js，src节点携带我的参数信息
         var script = document.createElement("script");
         script.type="text/javascript";
@@ -223,7 +223,7 @@ $.contains = function(parent, cur){
             clearTimeout(time);
         };
     };
-
+### 这里的方法暂时还没有分析
     $.show_tips = function(words, timeout) {
         var tips = $('.tips')[0] || (function() {
             var tips = document.createElement('div');
@@ -235,7 +235,7 @@ $.contains = function(parent, cur){
         $.addClass(tips, 'show');
         setTimeout($.hide_tips, timeout + 1000);
     };
-
+### 这里的方法暂时还没有分析
     $.hide_tips = function() {
         var tips = $('.tips')[0];
         $.removeClass(tips, 'show');
@@ -248,4 +248,32 @@ $.contains = function(parent, cur){
         alert("支持clip");
     }else{
         alert("不支持clip");
+    }
+### 在html上加入class
+    var root = document.documentElement;
+    root.classList.add("您要添加的class");//可以在html即文档的根节点上加入class
+    root.classList.remove("您要删除的class");//可以把html即文档根节点上删除一个class
+### 封装判断是否支持某个css的写法的函数
+    function testProperty(property) {
+        var root = document.documentElement;
+        if (property in root.style) {
+            root.classList.add(property.toLowerCase());
+            return true;
+        }
+        root.classList.add('no-' + property.toLowerCase());
+        return false;
+    }
+### 封装判断是否支持某个css写法的一某个属性
+    function testValue(id, value, property) {
+        //id 给html根节点增加的class名
+        //value 要检查的css的属性
+        //property 要检查的css属性的css名
+        var dummy = document.createElement('p');
+        dummy.style[property] = value;
+        if (dummy.style[property]) {
+            root.classList.add(id);
+            return true;
+        }
+        root.classList.add('no-' + id);
+        return false;
     }
