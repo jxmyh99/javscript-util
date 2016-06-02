@@ -277,3 +277,41 @@ js常用的函数
         root.classList.add('no-' + id);
         return false;
     }
+
+### js切换图片方法两则
+
+    /*
+        dom : 要让图片切换的dom
+        time : 切换的时间间隔
+     */
+    function tabPic(dom,time){
+        //正序完后，会倒序返回
+        var isTrue = true,
+            n = 0,
+            $dom = $(dom);
+            $dom.eq(n).show().siblings().hide();
+            setInterval(function(){tabRun($dom)},time);
+            function tabRun($dom){
+                if(n==$dom.length-1) isTrue=true;
+                if(n==0) isTrue=false;
+                isTrue ? n-- : n++;
+                // $dom.eq(n).css({display:'block'}).siblings().css({display:'none'})
+                $dom.eq(n).show().siblings().hide();
+                console.log(n);
+           }
+    }
+    function tabPic2(dom,time){
+        //只会正序
+        var n = 0,
+            $dom = $(dom);
+            $dom.hide();
+            $dom.eq(n).show();
+            setInterval(function(){tabRun($dom)},time);
+            function tabRun (dom) {
+                dom.hide();
+                dom.eq(n).show();
+                n++;
+                if(n>dom.length-1) n=0;
+                console.log(n);
+            }
+    }
