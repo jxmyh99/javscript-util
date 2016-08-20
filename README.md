@@ -315,3 +315,18 @@ js常用的函数
                 console.log(n);
             }
     }
+### 解决表单获取焦点里，被键盘挡住的问题
+```
+    function resetScroll(){
+        if (/Android/gi.test(navigator.userAgent)) {
+            window.addEventListener('resize', function() {
+              if (document.activeElement.tagName == 'INPUT' || document.activeElement.tagName == 'TEXTAREA') {
+                window.setTimeout(function() {
+                  //关键是这里的scrollIntoViewIfNeeded方法    
+                  document.activeElement.scrollIntoViewIfNeeded();
+                }, 0);
+              }
+        })
+    }
+    }
+```
